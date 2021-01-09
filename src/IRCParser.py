@@ -94,7 +94,7 @@ class IRCMessage:
 def getLetterAtIndexWithoutError(string, index: int, alt=None):
     try:
         return string[index]
-    except IndexError or KeyError:
+    except (IndexError, KeyError):
         return alt
 
 def parseIRC(line: str) -> IRCMessage or None:
