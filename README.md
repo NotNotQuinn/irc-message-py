@@ -115,4 +115,7 @@ pong!
 pong!
 pong!
 pong!
+
 ```
+## Contributing
+If you wish to contribute and change something make sure that when you run [IRCParser.spec.py](./src/IRCParser.spec.py) there are no errrors.
