@@ -55,7 +55,6 @@ class IRCMessage:
         self.raw = raw
         self.param = param
         self.trailing = trailing
-        self.user = {}  # empty object for you to do whatever you want with
 
     def __str__(self):
         # yes, I know, I know
