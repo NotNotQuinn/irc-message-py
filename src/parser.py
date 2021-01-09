@@ -1,3 +1,5 @@
+from IRCMessage import IRCMessage
+
 # ----------------------------------------------------------------------- #
 # https://github.com/aidenwallis/irc-message-ts/blob/master/src/parser.ts
 # translated to python

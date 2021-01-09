@@ -3,7 +3,7 @@ import json
 import pprint
 pp = pprint.PrettyPrinter(indent=4, compact=False, depth=100000)
 
-with open("test-folder\parseTests.json", "r") as f:
+with open("src/parseTests.json", "r") as f:
     tests = json.load(f)
 
 # yes i know its scuffed idc :)
