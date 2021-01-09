@@ -1,4 +1,4 @@
-from parser import parseIRC
+from IRCParser import parseIRC
 import json
 import pprint
 pp = pprint.PrettyPrinter(indent=4, compact=False, depth=100000)

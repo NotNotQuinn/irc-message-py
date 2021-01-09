@@ -1,7 +1,7 @@
 {
     "FOO": {
       "tags": {},
-      "prefix": null,
+      "prefix": "",
       "command": "FOO",
       "params": [],
       "param": "",
@@ -33,7 +33,7 @@
     },
     "PRIVMSG #Test :This is a test": {
       "tags": {},
-      "prefix": null,
+      "prefix": "",
       "command": "PRIVMSG",
       "params": ["#Test", "This is a test"],
       "param": "#Test",
@@ -65,7 +65,7 @@
     },
     "FOO bar baz quux": {
       "tags": {},
-      "prefix": null,
+      "prefix": "",
       "command": "FOO",
       "params": ["bar", "baz", "quux"],
       "param": "bar",
@@ -73,7 +73,7 @@
     },
     "FOO    bar      baz   quux": {
       "tags": {},
-      "prefix": null,
+      "prefix": "",
       "command": "FOO",
       "params": ["bar", "baz", "quux"],
       "param": "bar",
@@ -81,7 +81,7 @@
     },
     "FOO bar baz quux :This is a test": {
       "tags": {},
-      "prefix": null,
+      "prefix": "",
       "command": "FOO",
       "params": ["bar", "baz", "quux", "This is a test"],
       "param": "bar",
@@ -98,7 +98,7 @@
     "@test=super;single :test!me@test.ing FOO bar baz quux :This is a test": {
       "tags": {
         "test": "super",
-        "single": ""
+        "single": true
       },
       "prefix": "test!me@test.ing",
       "command": "FOO",

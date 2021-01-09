@@ -1,4 +1,89 @@
-from IRCMessage import IRCMessage
+
+"""
+
+Copyright (c) 2013-2015, Fionn Kelleher
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright 
+notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above 
+copyright notice, this list of conditions and the following 
+disclaimer in the documentation and/or other materials provided 
+with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
+FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
+GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER 
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN 
+IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+"""
+
+
+# ---------------------------------------------------------------------- #
+# https://github.com/aidenwallis/irc-message-ts/blob/master/src/types.ts
+# translated to python
+
+
+class IRCMessage:
+    def __init__(self, 
+                 command: str, 
+                 prefix: str, 
+                 tags: dict, 
+                 params: list, 
+                 raw: str, 
+                 param: str, 
+                 trailing: str):
+        """A class to store a parsed IRC message"""
+        self.command = command
+        self.prefix = prefix
+        self.tags = tags
+        self.params = params
+        self.raw = raw
+        self.param = param
+        self.trailing = trailing
+        self.user = {}  # empty object for you to do whatever you want with
+
+    def __str__(self):
+        # yes, I know, I know
+        out = ""
+        out += ("{\n")
+        out += (f'    "command":  "{self.command}"\n')
+        out += (f'    "param":    "{self.param}"\n')
+        out += (f'    "params":   {self.params}\n')
+        out += (f'    "prefix":   "{self.prefix}"\n')
+        out += (f'    "raw":      "{self.raw}"\n')
+        out += (f'    "tags":     {self.tags}\n')
+        out += (f'    "trailing": "{self.trailing}"\n')
+        out += ('}')
+
+        return out
+
+    # I added this for conveinece
+    @staticmethod
+    def empty():
+        """All defalt peramiters"""
+        return IRCMessage(command="", 
+                          prefix="", 
+                          tags={}, 
+                          params=[], 
+                          raw="", 
+                          param="", 
+                          trailing="")
+
 
 # ----------------------------------------------------------------------- #
 # https://github.com/aidenwallis/irc-message-ts/blob/master/src/parser.ts
@@ -10,10 +95,14 @@ from IRCMessage import IRCMessage
 def getLetterAtIndexWithoutError(string, index: int, alt=None):
     try:
         return string[index]
-    except IndexError:
+    except IndexError or KeyError:
         return alt
 
 def parseIRC(line: str) -> IRCMessage or None:
+    """Takes in a raw IRC string and breaks it down into its basic components. 
+    Returns `None` if there is an invalid IRC message otherwise, returns an 
+    `IRCMessage` with the coresponding values
+    """
     message = IRCMessage.empty() # all defalt values
     message.raw = line
 
@@ -39,7 +128,7 @@ def parseIRC(line: str) -> IRCMessage or None:
 
             tag = rawTags[i]
             pair = tag.split("=")
-            message.tags[pair[0]] = getLetterAtIndexWithoutError(pair, 1, alt="")
+            message.tags[pair[0]] = getLetterAtIndexWithoutError(pair, 1, alt=True)
 
             i += 1
         
