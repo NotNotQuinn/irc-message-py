@@ -196,7 +196,7 @@ def parseIRC(line: str) -> IRCMessage or None:
             position = nextspace + 1
 
             # Skip any trailing whitespace and continue looping.
-            while line[position] == " ": 
+            while getLetterAtIndexWithoutError(line, position) == " ": 
                 position += 1
             continue
 
