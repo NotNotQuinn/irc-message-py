@@ -1,21 +1,16 @@
 
 """
-
 Copyright (c) 2013-2015, Fionn Kelleher
 All rights reserved.
-
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions
 are met:
-
 1. Redistributions of source code must retain the above copyright 
 notice, this list of conditions and the following disclaimer.
-
 2. Redistributions in binary form must reproduce the above 
 copyright notice, this list of conditions and the following 
 disclaimer in the documentation and/or other materials provided 
 with the distribution.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
 "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
 LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
@@ -28,8 +23,6 @@ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
 IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
 OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN 
 IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-
 """
 
 
@@ -96,6 +89,7 @@ def getLetterAtIndexWithoutError(string, index: int, alt=None):
         return string[index]
     except (IndexError, KeyError):
         return alt
+
 
 def parseIRC(line: str) -> IRCMessage or None:
     """Takes in a raw IRC string and breaks it down into its basic components. 
@@ -185,7 +179,7 @@ def parseIRC(line: str) -> IRCMessage or None:
         # from after the colon to the end of the string, to the params array
         # and break out of the loop.
         if getLetterAtIndexWithoutError(line, position) == ":":
-            message.params.append(line[position + 1: -1] + line[-1])
+            message.params.append(line[position + 1:])
             break
     
         # If we still have some whitespace...
@@ -203,7 +197,7 @@ def parseIRC(line: str) -> IRCMessage or None:
         # If we don't have any more whitespace and the param isn't trailing,
         # push everything remaining to the params array.
         if nextspace == -1:
-            message.params.append(line[position: -1] + line[-1])
+            message.params.append(line[position:])
             break
 
     # Add the param property
