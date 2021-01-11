@@ -88,7 +88,7 @@ while True:
         if msg.command == "PING": 
             # pings come every 5 mins about
             # if we dont respond we will be disconnected
-            sendRaw(f"PONG :{msg.trailing}")
+            sendRaw(f"PONG :{msg.param}")
 ```
 ### Example Output
 ```txt
